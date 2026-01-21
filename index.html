@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Portal | Ng Jun Wei</title>
+    <title>Pocket Sport Science | Ng Jun Wei</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* CSS STYLES */
         :root {
-            --primary-color: #4a90e2;
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --text-color: #ffffff;
-            --accent-color: #38bdf8;
+            --primary-color: #3b82f6; /* Bright Blue */
+            --bg-color: #0f172a;      /* Dark Slate */
+            --card-bg: #1e293b;       /* Lighter Slate */
+            --text-color: #f8fafc;    /* White-ish */
+            --accent-color: #22d3ee;  /* Cyan */
+            --hover-color: #2563eb;
         }
 
         * {
@@ -28,58 +30,76 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            background-image: radial-gradient(circle at top right, #1e293b 0%, #0f172a 60%);
         }
 
         /* LOGIN SCREEN STYLES */
         #login-container {
             text-align: center;
             background: var(--card-bg);
-            padding: 3rem;
-            border-radius: 1rem;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            animation: fadeIn 0.5s ease-in;
+            padding: 3.5rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            border: 1px solid #334155;
+            animation: fadeIn 0.8s ease-out;
+            max-width: 450px;
+            width: 90%;
         }
 
-        h2 {
-            margin-bottom: 1.5rem;
-            font-weight: 300;
+        #login-container h2 {
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-size: 1.8rem;
+            color: var(--text-color);
+        }
+        
+        #login-container .subtitle {
+            margin-bottom: 2rem;
+            color: #94a3b8;
+            font-size: 0.95rem;
         }
 
         input[type="password"] {
-            padding: 10px 15px;
-            border-radius: 5px;
+            padding: 12px 20px;
+            border-radius: 8px;
             border: 1px solid #475569;
             background: #0f172a;
             color: white;
             font-size: 1rem;
             outline: none;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             width: 100%;
+            text-align: center;
+            letter-spacing: 2px;
+            transition: border 0.3s;
         }
 
         input[type="password"]:focus {
-            border-color: var(--primary-color);
+            border-color: var(--accent-color);
+            box-shadow: 0 0 10px rgba(34, 211, 238, 0.2);
         }
 
         button {
-            padding: 10px 20px;
-            background-color: var(--primary-color);
+            padding: 12px 25px;
+            background: linear-gradient(135deg, var(--primary-color), var(--hover-color));
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 1rem;
-            transition: background 0.3s;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
             width: 100%;
         }
 
         button:hover {
-            background-color: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
         }
 
         .error-msg {
             color: #ef4444;
-            margin-top: 10px;
+            margin-top: 15px;
             font-size: 0.9rem;
             display: none;
         }
@@ -94,79 +114,101 @@
 
         header {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
             animation: slideDown 0.8s ease-out;
         }
 
         header h1 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 0.5rem;
-            background: -webkit-linear-gradient(45deg, #4a90e2, #38bdf8);
+            background: -webkit-linear-gradient(135deg, #ffffff, #94a3b8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            font-weight: 700;
         }
 
         header p {
-            color: #94a3b8;
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 600;
         }
 
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2.5rem;
             padding: 1rem;
         }
 
         .card {
             background: var(--card-bg);
-            border-radius: 12px;
-            padding: 2rem;
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
             text-align: center;
             text-decoration: none;
             color: white;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             border: 1px solid #334155;
             position: relative;
-            overflow: hidden;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            align-items: center;
             height: 100%;
         }
 
+        /* Hover Effect for Cards */
         .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
-            border-color: var(--primary-color);
+            transform: translateY(-8px);
+            background: #253045;
+            border-color: var(--accent-color);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .card:hover i {
+            color: var(--accent-color);
+            transform: scale(1.1);
+        }
+
+        /* Icons */
+        .card i {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            transition: transform 0.3s, color 0.3s;
         }
 
         .card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--accent-color);
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
         }
 
         .card p {
-            font-size: 0.9rem;
-            color: #cbd5e1;
-            line-height: 1.5;
+            font-size: 0.95rem;
+            color: #94a3b8;
+            line-height: 1.6;
         }
 
         /* Footer */
         footer {
             text-align: center;
-            margin-top: 4rem;
-            color: #64748b;
-            font-size: 0.8rem;
+            margin-top: 5rem;
+            color: #475569;
+            font-size: 0.9rem;
+            border-top: 1px solid #1e293b;
+            padding-top: 2rem;
         }
 
         /* Animations */
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
         }
         @keyframes slideDown {
-            from { transform: translateY(-20px); opacity: 0; }
+            from { transform: translateY(-30px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
     </style>
@@ -174,48 +216,53 @@
 <body>
 
     <div id="login-container">
-        <h2>Restricted Access</h2>
-        <input type="password" id="passcode" placeholder="Enter Passcode" onkeydown="handleEnter(event)">
-        <button onclick="checkPassword()">Enter Portal</button>
-        <p class="error-msg" id="error-message">Incorrect Passcode</p>
+        <h2>Welcome to<br>Pocket Sport Science</h2>
+        <p class="subtitle">Please enter passcode to access</p>
+        
+        <input type="password" id="passcode" placeholder="Passcode" onkeydown="handleEnter(event)">
+        <button onclick="checkPassword()">ENTER</button>
+        
+        <p class="error-msg" id="error-message">Access Denied: Incorrect Code</p>
     </div>
 
     <div id="dashboard">
         <header>
-            <h1>Application Portal</h1>
-            <p>Select a tool to begin analysis</p>
+            <h1>Pocket Sport Science</h1>
+            <p>Application Protocol</p>
         </header>
 
         <div class="grid-container">
             <a href="https://ngjunwei777.github.io/Mocap_gait-lab/" target="_blank" class="card">
+                <i class="fa-solid fa-person-walking"></i>
                 <h3>Gait Lab</h3>
-                <p>Advanced Motion Capture gait analysis and reporting tool.</p>
+                <p>Motion Capture gait analysis and reporting tool.</p>
             </a>
 
             <a href="https://ngjunwei777.github.io/Mocap_sportmotion-analysis/" target="_blank" class="card">
+                <i class="fa-solid fa-person-running"></i>
                 <h3>Sport Motion</h3>
-                <p>Comprehensive motion analysis for sports performance optimization.</p>
+                <p>Advanced motion analysis for sports performance.</p>
             </a>
 
             <a href="https://ngjunwei777.github.io/Runner-Readiness-Assessment/" target="_blank" class="card">
+                <i class="fa-solid fa-heart-pulse"></i>
                 <h3>Runner Readiness</h3>
-                <p>Assessment tools to determine physical readiness for runners.</p>
+                <p>Assessment tools for physical readiness.</p>
             </a>
 
             <a href="https://ngjunwei777.github.io/Macrovision/" target="_blank" class="card">
+                <i class="fa-solid fa-eye"></i>
                 <h3>Macrovision</h3>
-                <p>Data visualization and macro-level analysis suite.</p>
+                <p>Macro-level data visualization suite.</p>
             </a>
         </div>
 
         <footer>
-            &copy; 2024 Portfolio Portal. All Rights Reserved.
+            Copyright &copy; Ng Jun Wei
         </footer>
     </div>
 
     <script>
-        // JAVASCRIPT LOGIC
-        
         const CORRECT_PASS = "777";
 
         function checkPassword() {
@@ -225,37 +272,36 @@
             const dashboard = document.getElementById("dashboard");
 
             if (input === CORRECT_PASS) {
-                // Hide login, show dashboard
+                // Fade out login, show dashboard
                 loginBox.style.display = "none";
                 dashboard.style.display = "block";
-                
-                // Change body alignment for dashboard view
-                document.body.style.display = "block";
+                document.body.style.display = "block"; // Reset flex align for full page
             } else {
                 // Show error
                 errorMsg.style.display = "block";
-                // Shake animation effect
+                // Add Shake Animation
                 loginBox.style.animation = "none";
                 loginBox.offsetHeight; /* trigger reflow */
                 loginBox.style.animation = "shake 0.5s";
+                document.getElementById("passcode").value = ""; // Clear input
             }
         }
 
-        // Allow pressing "Enter" key to submit
+        // Allow "Enter" key
         function handleEnter(e) {
             if (e.key === "Enter") {
                 checkPassword();
             }
         }
 
-        // Add shake animation style dynamically
+        // Dynamic shake animation style
         const styleSheet = document.createElement("style");
         styleSheet.innerText = `
             @keyframes shake {
                 0% { transform: translateX(0); }
-                25% { transform: translateX(-5px); }
-                50% { transform: translateX(5px); }
-                75% { transform: translateX(-5px); }
+                25% { transform: translateX(-10px); }
+                50% { transform: translateX(10px); }
+                75% { transform: translateX(-10px); }
                 100% { transform: translateX(0); }
             }
         `;
